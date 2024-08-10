@@ -7,7 +7,7 @@ class Scanner:
         self.range = range
         print(f"[+] Scanning subnet {self.range}")
 
-    def scan(self):
+    def scan(self,color):
         arp_header = scapy.ARP(pdst = self.range)
         ether_header = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
         arp_request_packet = ether_header/arp_header
@@ -25,7 +25,7 @@ class Scanner:
             print(f"IP\t\t\t\tMAC")
             print("-------------------------------------------------------")
             for network in networks:
-                print(f"{Fore.LIGHTMAGENTA_EX if network['you']==True else ''}{network['ip']}\t\t{network['mac']}\t{f'<< [YOU]' if network['you']==True else ''}{Fore.RESET}")
+                print(f"{color if network['you']==True else ''}{network['ip']}\t\t{network['mac']}\t{f'<< [YOU]' if network['you']==True else ''}{Fore.RESET}")
             print('\n')
         else:
             print("[X] No Networks Found!!")
