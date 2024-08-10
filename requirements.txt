@@ -3,3 +3,4 @@ random
 argparse
 colorama
 re
+psutil
