@@ -20,7 +20,7 @@ class InterfaceScanner:
         except KeyError:
             return "Interface not found"
 
-    def scan(self):
+    def scan(self,color):
         subnet = self.get_ip_address_subnet(self.interface)
         arp_header = scapy.ARP(pdst = subnet)
         ether_header = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -39,7 +39,7 @@ class InterfaceScanner:
             print(f"IP\t\t\t  MAC Address")
             print("-------------------------------------------------------")
             for network in networks:
-                print(f"{Fore.LIGHTMAGENTA_EX if network['you']==True else ''}{network['ip']}\t\t{network['mac']}\t{f'<< [YOU]' if network['you']==True else ''}{Fore.RESET}")
+                print(f"{color if network['you']==True else ''}{network['ip']}\t\t{network['mac']}\t{f'<< [YOU]' if network['you']==True else ''}{Fore.RESET}")
             print("\n\n")
         else:
             print("[X] No Networks Found!!")
