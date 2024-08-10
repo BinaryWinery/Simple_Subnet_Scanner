@@ -1,4 +1,4 @@
-import argparse,re,os
+import argparse,re,os,random
 
 from colorama import Fore
 from sub import subnet,interface
@@ -11,11 +11,13 @@ class Main:
         parser.add_argument('-i','--interface',help="for interface scan")
         parser.add_argument('-r','--range',help="for range scan")
         self.args = parser.parse_args()
-        self.red = Fore.RED
+        colors = [Fore.RED,Fore.GREEN,Fore.BLUE,Fore.CYAN,Fore.MAGENTA,Fore.YELLOW,Fore.LIGHTRED_EX]
+        randomNumber = random.randint(0,6)
+        self.randomColor = colors[randomNumber]
         self.reset = Fore.RESET
 
     def scan(self):
-        print(f"""{self.red}
+        print(f"""{self.randomColor}
         ╔═╗┬┌┬┐┌─┐┬  ┌─┐  ╔═╗┌─┐┌─┐┌┐┌┌┐┌┌─┐┬─┐
         ╚═╗││││├─┘│  ├┤   ╚═╗│  ├─┤││││││├┤ ├┬┘
         ╚═╝┴┴ ┴┴  ┴─┘└─┘  ╚═╝└─┘┴ ┴┘└┘┘└┘└─┘┴└─{self.reset}
@@ -26,9 +28,9 @@ class Main:
         interfaceName = self.args.interface
 
         if(choice == "interface" and (interface!=None or interface!="")):
-            interface.InterfaceScanner(interfaceName).scan()
+            interface.InterfaceScanner(interfaceName).scan(self.randomColor)
         elif(choice=="subnet" and (ipRange!=None or ipRange!="")):
-            subnet.Scanner(ipRange).scan()
+            subnet.Scanner(ipRange).scan(self.randomColor)
         else:
             print("ip range or interface required")
 
