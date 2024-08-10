@@ -1,0 +1,5 @@
+scapy
+random
+argparse
+colorama
+re
